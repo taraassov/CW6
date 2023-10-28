@@ -1,0 +1,35 @@
+{% extends 'client/base.html' %}
+
+{% block content %}
+    <div class="row">
+        {% for object in object_list %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <p class="card-text">{{ object.email }}</p>
+                        <p class="card-text">{{ object.first_name }} {{ object.last_name }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if request.user.is_staff %}
+                                <div class="btn-group">
+                                    {% if object.is_active %}
+                                    <a href="{% url 'users:deactivate_user' object.pk %}" type="button" class="btn btn-sm btn-outline-danger">Отключить</a>
+                                    {% else %}
+                                    <a href="{% url 'users:activate_user' object.pk %}" type="button" class="btn btn-sm btn-outline-success">Включить</a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+                <a href="{% url 'client:main_page' %}">На главную</a>
+            </p>
+        </div>
+    </footer>
+{% endblock %}
