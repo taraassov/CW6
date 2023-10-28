@@ -1,0 +1,31 @@
+{% extends 'client/base.html' %}
+{% block content %}
+<div class="col-12 mb-5">
+
+<div class="row">
+        <div class="col-1-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <p class="card-text">Количество рассылок всего: {{ num_mailings }}</p>
+                    <p class="card-text">Количество активных рассылок: {{ num_active_mailings }}</p>
+                    <p class="card-text">Количество уникальных клиентов для рассылок: {{ num_unique_clients }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="col-1-3">
+                            {% if random_articles %}
+                            <h2>Случайные статьи из блога:</h2>
+                            <ul>
+                            {% for article in random_articles %}
+                            <li><h3>{{ article.title }}</h3><p>{{ article.content }}</p></li>
+                            {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p>В блоге нет статей.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
